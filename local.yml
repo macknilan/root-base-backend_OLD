@@ -1,0 +1,33 @@
+version: "3.9"
+
+volumes:
+  local_postgres_data: {}
+
+services:
+  postgres:
+    image: postgres:13.3
+    container_name: postgres
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "5432:5432"
+
+  django:
+    build:
+      context: .
+    container_name: django
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    # command: python3 manage.py migrate
+    command: python3 manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+        - "8000:8000"
+    depends_on:
+        - postgres
+
+
