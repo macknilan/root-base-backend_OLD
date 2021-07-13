@@ -6,7 +6,7 @@ volumes:
 services:
   postgres:
     image: postgres:13.3
-    container_name: postgres
+    container_name: root-base-backend-postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
     env_file:
@@ -17,7 +17,7 @@ services:
   django:
     build:
       context: .
-    container_name: django
+    container_name: root-base-backend-django
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
