@@ -25,13 +25,15 @@ ENV PYTHONUNBUFFERED 1
 # PYTHON FROM COPYING PYC FILES TO THE CONTAINER
 ENV PYTHONDONTWRITEBYTECODE 1
 
-COPY /requirements/requirements.txt /app
+# COPY /requirements/requirements.txt /app
+COPY /requirements /app
 
 RUN python3 -m pip install --no-cache-dir --upgrade \
     pip \
     setuptools \
     wheel
-RUN python3 -m pip install --no-cache-dir -r requirements.txt
+# RUN python3 -m pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install --no-cache-dir -r local.txt
 
 # INSTALL REQUIRED SYSTEM DEPENDENCIES
 RUN apt-get update && apt-get install --no-install-recommends -y \

@@ -4,6 +4,10 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
+
+# drf spectacular
+from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
+
 # from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
@@ -14,18 +18,22 @@ urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    # path("users/", include("sand_box_cookiecutter.users.urls", namespace="users")),
+    path("users-mgnt/", include("root.users.urls", namespace="users_mgnt")),
     # path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
+    # My stuff: custom urls includes go here
+    # Local
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
+    # Local
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
-# urlpatterns += [
-#     # API base url
-#     path("api/", include("config.api_router")),
-#     # DRF auth token
-#     path("auth-token/", obtain_auth_token),
-# ]
+urlpatterns += [
+    # API base url
+    path("api/v1/", include(("root.users.urls", "users"), namespace="users"))
+    # DRF auth token
+    # path("auth-token/", obtain_auth_token),
+]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
