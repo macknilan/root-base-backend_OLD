@@ -278,9 +278,9 @@ REST_FRAMEWORK = {
         # 'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        #    # "rest_framework_simplejwt.authentication.JWTAuthentication",
-        #    # "rest_framework.authentication.SessionAuthentication",
-        #    # "rest_framework.authentication.TokenAuthentication",
+        # "rest_framework_simplejwt.authentication.JWTAuthentication",
+        # "rest_framework.authentication.SessionAuthentication",
+        # "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
@@ -288,12 +288,14 @@ REST_FRAMEWORK = {
     # "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
+# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
     # A JWT will be valid for 1 hour
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15)
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    # 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
-CORS_URLS_REGEX = r"^/api/.*$"
+CORS_URLS_REGEX = r"^/api/v1/.*$"
 # My stuff...
 # ------------------------------------------------------------------------------
