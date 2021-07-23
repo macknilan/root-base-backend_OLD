@@ -32,9 +32,14 @@ class CategoryViewSet(
 
     def get_permissions(self):
         """Assign permissions based on action"""
-
+        permissions = [IsAuthenticated]
         if self.action in ["list"]:
             permissions = [IsAuthenticated]
         elif self.action in ["create", "update", "partial_update"]:
-            permissions = [IsAuthenticated, IsCategoryAdmin]
+            permissions.append(IsCategoryAdmin)
         return [permission() for permission in permissions]
+
+    # def get_queryset(self):
+    #     """Restrict list to public-only."""
+    #     queryset = Category.objects.all()
+    #     return queryset
