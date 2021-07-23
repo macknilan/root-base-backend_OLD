@@ -30,7 +30,8 @@ urlpatterns = [
 # API URLS
 urlpatterns += [
     # API base url
-    path("api/v1/", include(("root.users.urls", "users"), namespace="users"))
+    path("api/v1/", include(("root.users.urls", "users"), namespace="users")),
+    path("api/v1/", include(("root.blog.urls", "categories"), namespace="categories")),
     # DRF auth token
     # path("auth-token/", obtain_auth_token),
 ]

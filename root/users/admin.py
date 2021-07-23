@@ -42,7 +42,6 @@ class UserProfile(admin.ModelAdmin):
         "user__first_name",
         "user__last_name",
     )
-    # list_filter = ('reputation',)
 
 
 admin.site.register(User, UserAdmin)

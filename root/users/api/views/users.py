@@ -48,7 +48,13 @@ class UserViewSet(
         """
         if self.action in ["login", "signup", "verify"]:
             permissions = [AllowAny]
-        elif self.action in ["profile", "retrieve", "update", "partial_update"]:
+        elif self.action in [
+            "profile",
+            "retrieve",
+            "update",
+            "partial_update",
+            "profile",
+        ]:
             permissions = [IsAuthenticated, IsAccountOwner]
         else:
             permissions = [IsAuthenticated]
@@ -100,4 +106,5 @@ class UserViewSet(
         serializer.is_valid(raise_exception=True)
         serializer.save()
         data = UserModelSerializer(user).data
+        print(data)
         return Response(data)

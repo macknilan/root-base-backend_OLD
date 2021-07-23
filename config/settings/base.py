@@ -92,6 +92,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # My custom apps go here
     "root.users.apps.UsersConfig",
+    "root.blog.apps.BlogConfig",
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -291,11 +292,11 @@ REST_FRAMEWORK = {
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
     # A JWT will be valid for 1 hour
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     # 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
-CORS_URLS_REGEX = r"^/api/v1/.*$"
+CORS_URLS_REGEX = r"^/api/.*$"
 # My stuff...
 # ------------------------------------------------------------------------------
