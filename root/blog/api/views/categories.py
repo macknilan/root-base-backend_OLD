@@ -54,7 +54,3 @@ class CategoryViewSet(
         """List all categories."""
         queryset = Category.objects.all()
         return queryset
-
-    # def create(self, request, *args, **kwargs):
-    #     serializer = CategorySerializer(data=request.data)
-    #     serializer.is_valid(raise_exception=True)
