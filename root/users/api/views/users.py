@@ -53,7 +53,6 @@ class UserViewSet(
             "retrieve",
             "update",
             "partial_update",
-            "profile",
         ]:
             permissions = [IsAuthenticated, IsAccountOwner]
         else:

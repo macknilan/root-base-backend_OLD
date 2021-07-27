@@ -12,7 +12,7 @@ class IsCategoryAdmin(BasePermission):
         """Verify user is a superuser and active"""
 
         if (
-            request.user.is_authenticated
+            request.user.is_verified
             and request.user.is_staff
             and request.user.is_superuser
         ):

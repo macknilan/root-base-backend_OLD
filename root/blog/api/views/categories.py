@@ -7,7 +7,8 @@ from rest_framework import mixins
 from rest_framework.viewsets import GenericViewSet
 
 # Permissions
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from root.blog.api import serializers
 
 from root.blog.api.permissions import IsCategoryAdmin
 
@@ -23,23 +24,37 @@ class CategoryViewSet(
     mixins.RetrieveModelMixin,
     mixins.UpdateModelMixin,
     mixins.ListModelMixin,
+    mixins.DestroyModelMixin,
     GenericViewSet,
 ):
 
     serializer_class = CategorySerializer
-    queryset = Category.objects.all()
+    # permission_classes = [IsAuthenticated]
+    # queryset = Category.objects.all()
     lookup_field = "name"
 
     def get_permissions(self):
-        """Assign permissions based on action"""
-        permissions = [IsAuthenticated]
+        """Assign permissions to categories based on actions."""
+
         if self.action in ["list"]:
-            permissions = [IsAuthenticated]
-        elif self.action in ["create", "update", "partial_update"]:
-            permissions.append(IsCategoryAdmin)
+            permissions = [AllowAny]
+        elif self.action in [
+            "create",
+            "retrieve",
+            "update",
+            "partial_update",
+            "destroy",
+        ]:
+            permissions = [IsCategoryAdmin]
+        else:
+            permissions = [AllowAny]
         return [permission() for permission in permissions]
 
-    # def get_queryset(self):
-    #     """Restrict list to public-only."""
-    #     queryset = Category.objects.all()
-    #     return queryset
+    def get_queryset(self):
+        """List all categories."""
+        queryset = Category.objects.all()
+        return queryset
+
+    # def create(self, request, *args, **kwargs):
+    #     serializer = CategorySerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)

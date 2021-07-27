@@ -10,6 +10,11 @@ class Category(models.Model):
     name = models.CharField(
         _("category name"), max_length=100, unique=True, help_text=_("Category name")
     )
+    description = models.CharField(
+        _("Description category"),
+        max_length=255,
+        help_text=_("Description category"),
+    )
 
     # class Meta:
     #     ordering = ("name",)

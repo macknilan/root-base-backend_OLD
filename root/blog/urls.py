@@ -9,7 +9,7 @@ from rest_framework.routers import DefaultRouter
 # Views
 from root.blog.api.views import CategoryViewSet
 
-router = DefaultRouter()
+router = DefaultRouter(trailing_slash=False)
 router.register(r"categories", CategoryViewSet, basename="categories")
 app_name = "blog"
 

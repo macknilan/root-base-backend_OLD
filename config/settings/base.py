@@ -86,7 +86,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "rest_framework",
-    "rest_framework.authtoken",
+    # "rest_framework.authtoken",
     "corsheaders",
 ]
 LOCAL_APPS = [
@@ -274,14 +274,14 @@ LOGGING = {
 # -------------------------------------------------------------------------------
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
         # 'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        # "rest_framework_simplejwt.authentication.JWTAuthentication",
-        # "rest_framework.authentication.SessionAuthentication",
-        # "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
@@ -292,11 +292,19 @@ REST_FRAMEWORK = {
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
     # A JWT will be valid for 1 hour
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
-    # 'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    # "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
+CORS_ALLOW_ALL_ORIGINS = True  # Dejarlo asi solo para prueba
+CORS_ALLOWED_ORIGINS = [
+    "http://0.0.0.0:8000",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
 CORS_URLS_REGEX = r"^/api/.*$"
+
 # My stuff...
 # ------------------------------------------------------------------------------
