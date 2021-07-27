@@ -7,6 +7,31 @@ __pycache__/
 # C extensions
 *.so
 
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media
+
+# Backup files # 
+*.bak
+
+# If you are using PyCharm # 
+.idea/**/workspace.xml 
+.idea/**/tasks.xml 
+.idea/dictionaries 
+.idea/**/dataSources/ 
+.idea/**/dataSources.ids 
+.idea/**/dataSources.xml 
+.idea/**/dataSources.local.xml 
+.idea/**/sqlDataSources.xml 
+.idea/**/dynamic.xml 
+.idea/**/uiDesigner.xml 
+.idea/**/gradle.xml 
+.idea/**/libraries 
+*.iws /out/
+
 # Distribution / packaging
 .Python
 build/
@@ -41,6 +66,7 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
+.pytest_cache/ 
 nosetests.xml
 coverage.xml
 *.cover
@@ -48,7 +74,6 @@ coverage.xml
 
 # Translations
 *.mo
-*.pot
 
 # Django stuff:
 staticfiles/
@@ -62,12 +87,17 @@ target/
 # pyenv
 .python-version
 
-
+# celery
+celerybeat-schedule.*
 
 # Environments
+.env
 .venv
+env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 
 # Rope project settings
 .ropeproject
@@ -82,7 +112,6 @@ ENV/
 ### Node template
 # Logs
 logs
-*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -161,10 +190,6 @@ typings/
 # Local History for Visual Studio Code
 .history/
 
-
-
-
-
 ### Windows template
 # Windows thumbnail cache files
 Thumbs.db
@@ -224,6 +249,8 @@ Temporary Items
 *.tmlanguage.cache
 *.tmPreferences.cache
 *.stTheme.cache
+*.sublime-workspace
+*.sublime-project
 
 # Workspace files are user-specific
 *.sublime-workspace
