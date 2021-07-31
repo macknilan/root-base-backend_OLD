@@ -9,8 +9,7 @@ from rest_framework.viewsets import GenericViewSet
 # Permissions
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from root.blog.api import serializers
-
-from root.blog.api.permissions import IsCategoryAdmin
+from root.blog.api.permissions import IsBlogAdmin
 
 # Models
 from root.blog.models import Category
@@ -29,23 +28,20 @@ class CategoryViewSet(
 ):
 
     serializer_class = CategorySerializer
-    # permission_classes = [IsAuthenticated]
-    # queryset = Category.objects.all()
     lookup_field = "name"
 
     def get_permissions(self):
         """Assign permissions to categories based on actions."""
 
-        if self.action in ["list"]:
+        if self.action in ["list", "retrieve"]:
             permissions = [AllowAny]
         elif self.action in [
             "create",
-            "retrieve",
             "update",
             "partial_update",
             "destroy",
         ]:
-            permissions = [IsCategoryAdmin]
+            permissions = [IsBlogAdmin]
         else:
             permissions = [AllowAny]
         return [permission() for permission in permissions]

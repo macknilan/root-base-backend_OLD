@@ -292,7 +292,7 @@ REST_FRAMEWORK = {
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/settings.html
 SIMPLE_JWT = {
     # A JWT will be valid for 1 hour
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     # "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 

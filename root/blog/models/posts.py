@@ -1,4 +1,4 @@
-""" Post's for the Blog """
+""" Model Post for the Blog """
 
 from django.db import models
 from django.utils import timezone
@@ -12,8 +12,9 @@ from root.utils.models import RootBaseModel
 from root.blog.models import Category
 
 # https://docs.djangoproject.com/en/3.2/topics/db/managers/#modifying-a-manager-s-initial-queryset
-class PostManager(models.Manager):
+class PostLet(models.Manager):
     def get_queryset(self):
+        """Show posts less than or equal to (lte) now"""
         now = timezone.now()
         return super().get_queryset().filter(publish_date__lte=now)
 
@@ -21,12 +22,14 @@ class PostManager(models.Manager):
 class Post(RootBaseModel):
     """Post model."""
 
-    user = models.ForeignKey("users.User", on_delete=models.PROTECT)
-    categories = models.ManyToManyField(Category)
+    user = models.ForeignKey("users.User", on_delete=models.SET_NULL, null=True)
+    categories = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     title = models.CharField(_("title"), max_length=255)
     intro = models.CharField(_("intro"), max_length=255)
     body = models.TextField()
-    image_header = models.ImageField(_("image_header"), upload_to="posts/photos")
+    image_header = models.ImageField(
+        _("image_header"), upload_to="posts/photos", blank=True, null=True
+    )
     is_draft = models.BooleanField(_("is_draft"), default=True)
     url = models.SlugField(_("url"), max_length=255, unique=True)
     publish_date = models.DateTimeField(
@@ -34,7 +37,7 @@ class Post(RootBaseModel):
     )
 
     objects = models.Manager()  # The default manager
-    published = PostManager()  # The Dahl-specific manager
+    published = PostLet()  # The Post Manager manager
 
     class Meta(RootBaseModel.Meta):
         """Overwrite meta class of RootBaseModel"""

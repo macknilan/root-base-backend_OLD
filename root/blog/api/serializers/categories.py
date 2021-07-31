@@ -26,3 +26,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
         model = Category
         fields = ["name", "description"]
+        read_only_fields = [
+            "id",
+        ]
