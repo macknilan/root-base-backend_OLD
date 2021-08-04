@@ -3,8 +3,11 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+# Utilities
+from root.utils.models import RootBaseModel
 
-class Category(models.Model):
+
+class Category(RootBaseModel):
     """Category model"""
 
     name = models.CharField(

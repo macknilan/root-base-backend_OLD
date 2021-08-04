@@ -23,7 +23,7 @@ class PostAdmin(admin.ModelAdmin):
 
     list_display = [
         "user",
-        # "categories",
+        "categories",
         "title",
         "intro",
         "body",

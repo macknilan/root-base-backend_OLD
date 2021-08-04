@@ -29,17 +29,16 @@ class PostViewSet(
     GenericViewSet,
 ):
 
-    serializer_class = PostSerializer
+    serializer_class = PostModelSerializer
     lookup_field = "url"
 
     def get_permissions(self):
         """Assign permissions to posts based on actions."""
 
-        if self.action in ["list"]:
+        if self.action in ["list", "retrieve"]:
             permissions = [AllowAny]
         elif self.action in [
             "create",
-            "retrieve",
             "update",
             "partial_update",
         ]:

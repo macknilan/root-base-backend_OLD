@@ -122,7 +122,6 @@ class UserSignUpSerializer(serializers.Serializer):
             "type": "email_confirmation",
         }
         token = jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
-        # return token.decode()
         return token
 
 

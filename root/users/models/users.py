@@ -14,16 +14,16 @@ from root.utils.models import RootBaseModel
 class User(RootBaseModel, AbstractUser):
     """User model.
 
-    Extend from Django's Abstract User, change the username field
+    - Extend from Django's Abstract User, change the username field
     to email to make it unique.
 
-    The required fields are now username, first_name, last_name
+    - The required fields are now username, first_name, last_name
 
-    The field phone_number is formatted by means of regular expressions
+    - The field phone_number is formatted by means of regular expressions
 
-    The new field is created is_client
+    - The new field is created is_client
 
-    The new field is created and by defauld is_verfied is set to
+    - The new field is created and by defauld is_verfied is set to
     false until it is verified by mail
     """
 

@@ -3,21 +3,41 @@
 # Django REST Framework
 from django.db.models import fields
 from rest_framework import serializers
+from root.blog import models
 
 # from rest_framework.validators import UniqueValidator
 
 # Model
 from root.blog.models import Post, Category
+from root.users.models import User
+
+
+class UserModelSerializer(serializers.ModelSerializer):
+    """User model serializer."""
+
+    class Meta:
+        """Meta class."""
+
+        model = User
+        fields = [
+            "first_name",
+            "last_name",
+            "email",
+            "phone_number",
+        ]
 
 
 class PostModelSerializer(serializers.ModelSerializer):
     """Post model serializer"""
 
+    categories = serializers.StringRelatedField()
+    user = UserModelSerializer(read_only=True)
+
     class Meta:
         """Meta class"""
 
         model = Post
-        fields = (
+        fields = [
             "user",
             "categories",
             "title",
@@ -27,7 +47,10 @@ class PostModelSerializer(serializers.ModelSerializer):
             "is_draft",
             "url",
             "publish_date",
-        )
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["url"]
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -80,13 +103,17 @@ class PostSerializer(serializers.ModelSerializer):
 
         q = Post.objects.filter(title=data)
         if q.exists():
-            raise serializers.ValidationError("The title it's repeated.")
+            raise serializers.ValidationError(
+                "A post with the same title already exists."
+            )
         return data
 
     def create(self, data):
         """Create new post."""
 
-        # Create post
+        # import ipdb; ipdb.set_trace()
+        # breakpoint()
+
         post = Post.objects.create(
             user=data["user"],
             categories=Category.objects.get(name=data["categories"]),
@@ -104,8 +131,6 @@ class PostSerializer(serializers.ModelSerializer):
 
         # Post.objects.get(title=self.data['title'])
         # self.context['request'].data['title']
-        # import ipdb; ipdb.set_trace()
-        # breakpoint()
 
         instance.title = data.get("title", instance.title)
         instance.intro = data.get("intro", instance.intro)
