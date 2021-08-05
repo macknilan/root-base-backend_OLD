@@ -23,7 +23,7 @@ class Post(RootBaseModel):
     """Post model."""
 
     user = models.ForeignKey("users.User", on_delete=models.SET_NULL, null=True)
-    categories = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    categories = models.ForeignKey(Category, on_delete=models.RESTRICT, null=True)
     title = models.CharField(_("title"), max_length=255)
     intro = models.CharField(_("intro"), max_length=255)
     body = models.TextField()
