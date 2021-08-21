@@ -142,9 +142,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -297,14 +297,21 @@ SIMPLE_JWT = {
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
-CORS_ALLOW_ALL_ORIGINS = True  # Dejarlo asi solo para prueba
-CORS_ALLOWED_ORIGINS = [
-    "http://0.0.0.0:8000",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-]
+# CORS_ALLOW_ALL_ORIGINS = True  # Dejarlo asi solo para prueba
 
-CORS_URLS_REGEX = r"^/api/.*$"
+CORS_ALLOWED_ORIGINS = ["http://localhost:8080"]
+
+# CORS_URLS_REGEX = r"^/api/v1/.*$"
+
+CORS_ALLOW_HEADERS = [
+    "Accept",
+    "Authorization",
+    "Content-type",
+    "Accept-encoding",
+    "Origin",
+    "User-agent",
+    "Access-Control-Allow-Origin",
+]
 
 # My stuff...
 # ------------------------------------------------------------------------------

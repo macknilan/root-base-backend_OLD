@@ -42,7 +42,7 @@ class User(RootBaseModel, AbstractUser):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username", "first_name", "last_name"]
+    REQUIRED_FIELDS = ["username", "first_name"]
 
     is_public = models.BooleanField(
         default=True, help_text=_("Public profiles show all information about users.")

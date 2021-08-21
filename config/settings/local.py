@@ -14,6 +14,8 @@ SECRET_KEY = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+# ALLOWED_HOSTS = ["*"]
+
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -74,3 +76,6 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "0.1.0",
     # OTHER SETTINGS
 }
+
+# django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
+# CORS_ALLOW_ALL_ORIGINS = True  # Dejarlo asi solo para prueba
