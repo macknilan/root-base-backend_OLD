@@ -73,7 +73,7 @@ class UserSignUpSerializer(serializers.Serializer):
 
     # NAME
     first_name = serializers.CharField(min_length=2, max_length=30)
-    last_name = serializers.CharField(min_length=2, max_length=30)
+    # last_name = serializers.CharField(min_length=2, max_length=30)
 
     def validate(self, data):
         """Verify passwords match."""
