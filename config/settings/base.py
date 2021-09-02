@@ -129,9 +129,7 @@ PASSWORD_HASHERS = [
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -255,10 +253,7 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
-        }
+        "verbose": {"format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s"}
     },
     "handlers": {
         "console": {
@@ -281,9 +276,7 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.JSONRenderer",
         # 'rest_framework.renderers.BrowsableAPIRenderer',
     ],
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
     # "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
@@ -299,7 +292,11 @@ SIMPLE_JWT = {
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
 # CORS_ALLOW_ALL_ORIGINS = True  # Dejarlo asi solo para prueba
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:8080"]
+CORS_ALLOWED_ORIGINS = [
+    "http://0.0.0.0:8080",
+    "http://127.0.0.1:8080",
+    "http://localhost:8080",
+]
 
 # CORS_URLS_REGEX = r"^/api/v1/.*$"
 
