@@ -5,23 +5,18 @@ from django.urls import include, path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 
-# drf spectacular
+# DRF spectacular
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
-
-# from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
-    ),
+    path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users-mgnt/", include("root.users.urls", namespace="users_mgnt")),
-    # path("accounts/", include("allauth.urls")),
     # My stuff: custom urls includes go here
-    # Local
+    # Swagger View
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="docs"),
     # Local
@@ -32,8 +27,6 @@ urlpatterns += [
     # API base url
     path("api/v1/", include(("root.users.urls", "users"), namespace="users")),
     path("api/v1/", include(("root.blog.urls", "categories"), namespace="categories")),
-    # DRF auth token
-    # path("auth-token/", obtain_auth_token),
 ]
 
 if settings.DEBUG:

@@ -1,7 +1,6 @@
 """Blog models admin."""
 
 from django.contrib import admin
-from django.contrib.auth import admin as auth_admin
 
 # Models
 from root.blog.models import Category, Post

@@ -2,32 +2,36 @@ version: "3.9"
 
 volumes:
   local_postgres_data: {}
+  local_postgres_data_backups: {}
 
 services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: root_local_django
+    container_name: django
+    depends_on:
+        - postgres
+    volumes:
+      - .:/app
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+        - "8000:8000"
+    command: /start
+
   postgres:
-    image: postgres:13.3
-    container_name: root-base-backend-postgres
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: root_production_postgres
+    container_name: postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
+      - local_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
     ports:
       - "5431:5432"
-
-  django:
-    build:
-      context: .
-    container_name: root-base-backend-django
-    env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
-    # command: python3 manage.py migrate
-    command: python3 manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/app
-    ports:
-        - "8000:8000"
-    depends_on:
-        - postgres
-
-

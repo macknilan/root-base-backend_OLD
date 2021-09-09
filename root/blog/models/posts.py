@@ -27,14 +27,10 @@ class Post(RootBaseModel):
     title = models.CharField(_("title"), max_length=255)
     intro = models.CharField(_("intro"), max_length=255)
     body = models.TextField()
-    image_header = models.ImageField(
-        _("image_header"), upload_to="posts/photos", blank=True, null=True
-    )
+    image_header = models.ImageField(_("image_header"), upload_to="posts/photos", blank=True, null=True)
     is_draft = models.BooleanField(_("is_draft"), default=True)
     url = models.SlugField(_("url"), max_length=255, unique=True)
-    publish_date = models.DateTimeField(
-        _("published_date"), auto_now=False, auto_now_add=False, null=True, blank=True
-    )
+    publish_date = models.DateTimeField(_("published_date"), auto_now=False, auto_now_add=False, null=True, blank=True)
 
     objects = models.Manager()  # The default manager
     published = PostLet()  # The Post Manager manager

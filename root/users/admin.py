@@ -16,9 +16,7 @@ class UserAdmin(auth_admin.UserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     # fieldsets = (("User", {"fields": ("name",)}),) + auth_admin.UserAdmin.fieldsets
-    fieldsets = (
-        ("User", {"fields": ("is_verified", "is_public")}),
-    ) + auth_admin.UserAdmin.fieldsets
+    fieldsets = (("User", {"fields": ("is_verified", "is_public")}),) + auth_admin.UserAdmin.fieldsets
     list_display = [
         "username",
         "email",
@@ -35,13 +33,13 @@ class UserAdmin(auth_admin.UserAdmin):
 class UserProfile(admin.ModelAdmin):
     """Profile model admin"""
 
-    list_display = ("user", "biography", "picture")
-    search_fields = (
+    list_display = ["user", "biography", "picture"]
+    search_fields = [
         "user__username",
         "user__email",
         "user__first_name",
         "user__last_name",
-    )
+    ]
 
 
 admin.site.register(User, UserAdmin)
